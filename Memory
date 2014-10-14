@@ -1,0 +1,62 @@
+import java.io.File;
+
+import javax.swing.*;
+
+import java.awt.*;
+
+public class Memory {
+	static File[] bilder;
+	
+	public Memory(){
+		
+		File bildmapp = new File("bin/bildmapp");
+		File[] bilder = bildmapp.listFiles();
+		Kort[] k = new Kort[bilder.length];
+		ImageIcon tmpIcon;
+		for (int i = 0; i < bilder.length; i++ ){			
+			tmpIcon = new ImageIcon( bilder[i].getPath() );			
+			ImageIcon ikon = new ImageIcon(tmpIcon.getImage().getScaledInstance(250, 250, //Ändra parametrarna till nåt bättre
+											java.awt.Image.SCALE_DEFAULT));
+			k[i] = new Kort(ikon);	
+		}
+		
+		/*
+		
+		k[0].setStatus(Kort.Status.SYNLIGT);
+		
+		JFrame frame = new JFrame("Test");
+		frame.setSize(400,300);
+		JPanel panel = new JPanel();
+		panel.add(k[0]);
+		frame.add(panel);
+		frame.setVisible(true);
+		
+		*/
+	}
+	
+	
+	public static void main(String[] arg){
+		/*
+		Kanske ska fråga om antal spelare och storlek på planen direkt?
+		Kan fixa så att alla bilder får bra storlek när spelet initieras då och det behövs för
+		nyttSpel också... Frågan är hur vi ska få till det på nåt bra sätt...
+		*/
+		Memory m = new Memory();
+		
+
+	}
+	public void nyttSpel(int storlek, Kort[] k){
+		Kort[] spelPlanen = new Kort[storlek];
+		Verktyg.slumpOrdning(k);
+		for (int i = 0; i < storlek/2; i++){
+			spelPlanen[i] = k[i];
+			// spelPlanen[(storlek / 2) + 1] = k[i].copy(); // Borde fungera och dessutom göra allt kortare/snabbare?
+		}
+		for (int i = storlek/2; i < storlek; i++){
+			spelPlanen[i] = k[(i - storlek)].copy();
+		}
+		
+		Verktyg.slumpOrdning(spelPlanen);
+		
+	}
+}
