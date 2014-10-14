@@ -1,0 +1,50 @@
+import java.awt.Color;
+import javax.swing.*;
+
+public class Kort extends JButton{
+
+	private Icon icon;
+	private Status cStatus;
+
+	public Kort(Icon inpIcon){
+		cStatus = Kort.Status.SAKNAS;
+		this.icon = inpIcon;
+		visible();
+	}
+	public Kort(Icon inpIcon, Status startStatus){
+		cStatus = startStatus;
+		this.icon = inpIcon;
+		visible();
+	}
+
+	public enum Status {
+		DOLT, SYNLIGT, SAKNAS
+	}
+
+	private void visible(){
+		if (cStatus == Kort.Status.DOLT){
+			this.setBackground(Color.BLUE);
+			this.setIcon(null);
+		}else if (cStatus == Kort.Status.SYNLIGT){
+			this.setIcon(icon);
+		}else if (cStatus == Kort.Status.SAKNAS){
+			this.setBackground(Color.WHITE);
+			this.setIcon(null);
+		}
+	}
+
+	public void setStatus(Status sStatus){
+		cStatus = sStatus;
+		visible();
+	}
+	public Status getStatus(){
+		return cStatus;
+	}
+	public Kort copy(){
+		Kort kopiaKort = new Kort(icon, cStatus);
+		return kopiaKort;
+	}
+	public boolean sammaBild(Kort uKort){
+		return (icon == uKort.icon);
+	}
+}
