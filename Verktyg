@@ -1,0 +1,24 @@
+import java.util.Random;
+
+public class Verktyg {
+
+	public static void slumpOrdning(Object[] objField){
+		
+		Random rand = new Random();
+		Object[] tmpObjField = new Object[objField.length];
+		
+		for (int i = 0; i < objField.length; i++){
+			boolean found = false;
+			while (!found){
+				int place = rand.nextInt(objField.length);
+				if (tmpObjField[place] == null){
+					tmpObjField[place] = objField[i];
+					found = true;
+				}
+			}
+		}
+		for (int i = 0; i < objField.length; i++){
+			objField[i] = tmpObjField[i];
+		}
+	}
+}
