@@ -22,12 +22,12 @@ public class Memory {
 		
 		/*
 		
-		k[0].setStatus(Kort.Status.SYNLIGT);
+		k[5].setStatus(Kort.Status.SYNLIGT);
 		
 		JFrame frame = new JFrame("Test");
 		frame.setSize(400,300);
 		JPanel panel = new JPanel();
-		panel.add(k[0]);
+		panel.add(k[5]);
 		frame.add(panel);
 		frame.setVisible(true);
 		
@@ -40,9 +40,22 @@ public class Memory {
 		Kanske ska fråga om antal spelare och storlek på planen direkt?
 		Kan fixa så att alla bilder får bra storlek när spelet initieras då och det behövs för
 		nyttSpel också... Frågan är hur vi ska få till det på nåt bra sätt...
-		*/
-		Memory m = new Memory();
+		*/		
 		
+		
+		Memory m = new Memory();
+		int rows = 1;
+		int columns = 1;
+				
+		while( ( (rows * columns) % 2 ) != 0){
+		
+		rows = Integer.parseInt(JOptionPane.showInputDialog("How many rows do you want?"));
+		columns = Integer.parseInt(JOptionPane.showInputDialog("How many columns do you want?"));
+		
+		System.out.println(rows);
+		System.out.println(rows);
+		System.out.println(rows * columns);
+		}
 
 	}
 	public void nyttSpel(int storlek, Kort[] k){
@@ -50,12 +63,8 @@ public class Memory {
 		Verktyg.slumpOrdning(k);
 		for (int i = 0; i < storlek/2; i++){
 			spelPlanen[i] = k[i];
-			// spelPlanen[(storlek / 2) + 1] = k[i].copy(); // Borde fungera och dessutom göra allt kortare/snabbare?
+			spelPlanen[(storlek / 2) + 1] = k[i].copy(); 
 		}
-		for (int i = storlek/2; i < storlek; i++){
-			spelPlanen[i] = k[(i - storlek)].copy();
-		}
-		
 		Verktyg.slumpOrdning(spelPlanen);
 		
 	}
